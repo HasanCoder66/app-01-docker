@@ -24,8 +24,8 @@ jobs:
 
       - name: Build and push Docker image to Docker Hub
         run: |
-          docker build -t hasancoder66/smit-b-17-north:latest . 
-          docker push hasancoder66/smit-b-17-north:latest
+          sudo docker build -t hasancoder66/smit-b-17-north:latest . 
+          sudo docker push hasancoder66/smit-b-17-north:latest
 
       - name: Set up SSH key
         run: |
@@ -38,8 +38,8 @@ jobs:
       - name: Deploy Docker image to EC2
         run: |
           ssh -i private-key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} <<EOF
-            docker pull hasancoder66/smit-b-17-north:latest
-            docker stop smit-b-17-north || true
-            docker rm smit-b-17-north || true
-            docker run -d --name smit-b-17-north -p 3000:3000 hasancoder66/smit-b-17-north:latest
+            sudo docker pull hasancoder66/smit-b-17-north:latest
+            sudo docker stop smit-b-17-north || true
+            sudo docker rm smit-b-17-north || true
+            sudo docker run -d --name smit-b-17-north -p 3000:3000 hasancoder66/smit-b-17-north:latest
           EOF
