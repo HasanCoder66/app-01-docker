@@ -29,6 +29,14 @@ app.get("/api/users", (req, res) => {
     })
 })
 
+app.get("/api/users/hello", (req, res) => {
+    return res.status(200).json({
+        status:true,
+        message:"users retrieve successfully!",
+        data: users
+    })
+})
+
 app.post("/api/users", (req, res) => {
 
     users.push(req.body)
